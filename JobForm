@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VenuHR Premium Registration</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#667eea,#764ba2,#ff6b6b);min-height:100vh;padding:15px;display:flex;align-items:center;justify-content:center}
+.container{width:100%;max-width:600px;background:#fff;border-radius:20px;padding:25px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.header{text-align:center;margin-bottom:20px}
+.header h2{color:#4f46e5;margin-bottom:8px}
+input,select,textarea{width:100%;padding:14px;margin-top:6px;margin-bottom:14px;border:2px solid #e5e7eb;border-radius:12px}
+button{width:100%;padding:15px;border:none;border-radius:12px;background:linear-gradient(45deg,#22c55e,#16a34a);color:#fff;font-weight:bold}
+.popup{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);justify-content:center;align-items:center}
+.popup-content{background:#fff;padding:25px;border-radius:18px;text-align:center}
+.close-btn{margin-top:15px;background:#4f46e5}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h2>🎯 VenuHR Registration</h2>
+<p>Apply for Jobs Quickly</p>
+</div>
+
+<form id="candidateForm">
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="tel" id="mobile" placeholder="Mobile Number" required pattern="[0-9]{10}" maxlength="10" minlength="10">
+<input type="email" id="email" placeholder="Email" required>
+<input type="date" id="dob" required>
+
+<select id="gender" required>
+<option value="">Select Gender</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select>
+
+<select id="qualification" required>
+<option value="">Select Qualification</option>
+<option>SSC</option>
+<option>Intermediate</option>
+<option>Diploma</option>
+<option>Degree</option>
+<option>B.Tech</option>
+<option>MBA</option>
+<option>MCA</option>
+<option>M.Tech</option>
+<option>Other</option>
+</select>
+
+<input type="text" id="specialization" placeholder="Specialization" required>
+
+<select id="experience" required>
+<option>Fresher</option>
+<option>0-1 Years</option>
+<option>1-3 Years</option>
+<option>3-5 Years</option>
+<option>5+ Years</option>
+</select>
+
+<input type="text" id="location" placeholder="Enter Current Location" required>
+<textarea id="address" rows="3" placeholder="Address" required></textarea>
+
+<button type="submit">🚀 Submit Application</button>
+</form>
+</div>
+
+<div class="popup" id="successPopup">
+<div class="popup-content">
+<h3>✅ Success!</h3>
+<p>Application Submitted Successfully</p>
+<button type="button" class="close-btn" onclick="closePopup()">OK</button>
+</div>
+</div>
+
+<script>
+function closePopup(){
+document.getElementById("successPopup").style.display="none";
+}
+
+
+
+document.getElementById("candidateForm").addEventListener("submit", async function(e){
+e.preventDefault();
+
+const data={
+name:document.getElementById("name").value,
+mobile:document.getElementById("mobile").value,
+email:document.getElementById("email").value,
+dob:document.getElementById("dob").value,
+gender:document.getElementById("gender").value,
+qualification:document.getElementById("qualification").value,
+specialization:document.getElementById("specialization").value,
+experience:document.getElementById("experience").value,
+location:document.getElementById("location").value,
+address:document.getElementById("address").value
+};
+
+try{
+await fetch("https://script.google.com/macros/s/AKfycbxz1q8J8DoZNpNtiT9yeZ2bXTcqrukf0F387YHAxm8v6OCHE9A8FH_FGJwVbLEh315YZQ/exec",{
+method:"POST",
+body:JSON.stringify(data)
+});
+document.getElementById("candidateForm").reset();
+document.getElementById("successPopup").style.display="flex";
+}catch(err){
+alert("Submission Failed");
+}
+});
+</script>
+</body>
+</html>
